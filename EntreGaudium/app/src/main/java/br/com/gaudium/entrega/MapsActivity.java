@@ -35,7 +35,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private LinearLayout layMenuColeta, layMenuEntrega;
     private RelativeLayout layMenuOferta, layColetaButton, layEntregaButton, layMenu;
-    private TextView txtEnderecoOferta, txtEnderecoColeta, txtEntrega, txtEntregas;
+    private TextView txtEnderecoOferta, txtEnderecoColeta, txtEntrega, txtEntregas, txtEntregaEndereco;
     private Button btnRejeitar, btnAceitar, btnColetar, btnEntregar, btnDebugAction;
 
     Handler handler;
@@ -78,6 +78,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         layColetaButton = findViewById(R.id.layColetaButton);
         txtEnderecoColeta = findViewById(R.id.txtEnderecoColeta);
         txtEntrega = findViewById(R.id.txtEntrega);
+        txtEntregaEndereco = findViewById(R.id.txtEntregaEndereco);
         btnColetar = findViewById(R.id.btnColetar);
         btnColetar.setOnClickListener(view -> onCollect());
 
@@ -131,6 +132,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             PedidoJsonObj.EntregaObj e = entregadorObj.getPedido().getEntregaAtual();
             if(e != null) {
                 txtEntrega.setText(String.format(getString(R.string.va_ate_endereco_entrega_id), e.getId()));
+                txtEntregaEndereco.setText(e.getEndereco());
             }
         }
 

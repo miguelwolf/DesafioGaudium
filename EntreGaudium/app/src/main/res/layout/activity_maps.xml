@@ -153,10 +153,19 @@
                 android:id="@+id/txtEntrega"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="8dp"
                 android:textColor="#222"
                 android:textSize="16sp"
                 tools:text="Vá até o endereço do pedido #1" />
+
+            <TextView
+                android:id="@+id/txtEntregaEndereco"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:textColor="#222"
+                android:textSize="16sp"
+                tools:text="Lorem ipsum" />
 
             <!-- Espaço com botões do menu do momento ENTREGANDO -->
             <RelativeLayout

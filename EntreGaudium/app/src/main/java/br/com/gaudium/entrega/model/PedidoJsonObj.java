@@ -70,11 +70,13 @@ public class PedidoJsonObj {
 		private boolean entregue;
 		private double lat, lng;
 		private String id;
+		private String endereco;
 
-		public EntregaObj(String id, double lat, double lng){
+		public EntregaObj(String id, double lat, double lng, String endereco){
 			this.id = id;
 			this.lat = lat;
 			this.lng = lng;
+			this.endereco = endereco;
 		}
 
 		public double getLat() {
@@ -111,6 +113,14 @@ public class PedidoJsonObj {
 
 		public void setId(String id) {
 			this.id = id;
+		}
+
+		public String getEndereco() {
+			return endereco;
+		}
+
+		public void setEndereco(String endereco) {
+			this.endereco = endereco;
 		}
 	}
 }
