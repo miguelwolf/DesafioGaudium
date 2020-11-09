@@ -3,6 +3,7 @@ package br.com.gaudium.entrega;
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.view.View;
@@ -35,8 +36,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private LinearLayout layMenuColeta, layMenuEntrega;
     private RelativeLayout layMenuOferta, layColetaButton, layEntregaButton, layMenu;
-    private TextView txtEnderecoOferta, txtEnderecoColeta, txtEntrega, txtEntregas, txtEntregaEndereco;
+    private TextView txtEnderecoOferta, txtEnderecoColeta, txtEntrega, txtEntregas,
+            txtEntregaEndereco, txtTimer;
     private Button btnRejeitar, btnAceitar, btnColetar, btnEntregar, btnDebugAction;
+
+    private CountDownTimer timer;
 
     Handler handler;
 
@@ -68,6 +72,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         layMenuOferta = findViewById(R.id.layMenuOferta);
         txtEnderecoOferta = findViewById(R.id.txtEnderecoOferta);
         txtEntregas = findViewById(R.id.txtEntregasLabel);
+        txtTimer = findViewById(R.id.txtTimerLabel);
         btnRejeitar = findViewById(R.id.btnRejeitar);
         btnRejeitar.setOnClickListener(view -> onReject());
         btnAceitar = findViewById(R.id.btnAceitar);
@@ -259,6 +264,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void onReject() {
         entregadorObj.setStatus(StatusEntregadorEnum.DISPONIVEL);
         Util.playPop(this);
+        timer.cancel();
         updateScreen();
     }
 
@@ -269,6 +275,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void onAccept() {
         entregadorObj.setStatus(StatusEntregadorEnum.COLETANDO);
         Util.playPop(this);
+        timer.cancel();
         updateScreen();
     }
 
@@ -306,11 +313,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     public void showMenuOferta(boolean visible){
         layMenuOferta.setVisibility(visible?View.VISIBLE:View.GONE);
+
         if (entregadorObj.getPedido() != null) {
             txtEnderecoOferta.setText(entregadorObj.getPedido().getEndereco_coleta());
             txtEntregas.setText(getString(R.string.label_entregas, entregadorObj.getPedido().getEntregas().length));
         }
     }
+
+
+    /**
+     * Método responsável por iniciar cronômetro de 30 segundos limite para aceitação do pedido
+     * @return
+     */
+    private CountDownTimer timerToAccept() {
+        return new CountDownTimer(30000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                txtTimer.setText(getString(R.string.segundos_restantes, millisUntilFinished / 1000));
+            }
+
+            public void onFinish() {
+                onReject();
+            }
+
+        }.start();
+    }
+
 
     /**
      * Método que controla a exibição do menu que exibe onde o pedido deve ser coletado. Se o entregador estiver
@@ -397,6 +425,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 entregadorObj.setPedido(oferta);
                 entregadorObj.setStatus(StatusEntregadorEnum.DECIDINDO);
                 Util.tocarSomVibrar(MapsActivity.this);
+
+                //Inicia timer para aceite do pedido
+                timer = timerToAccept();
+
                 updateScreen();
             });
         }

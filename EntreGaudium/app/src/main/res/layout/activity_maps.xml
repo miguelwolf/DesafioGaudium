@@ -63,13 +63,25 @@
                 android:textSize="16sp"
                 tools:text="Rua da Assembéia, 10 - Centro" />
 
+            <TextView
+                android:id="@+id/txtTimerLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtEntregasLabel"
+                android:layout_alignRight="@+id/txtEnderecoOferta"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="12dp"
+                android:text="@string/segundos_restantes"
+                android:textColor="#3A3A3A"
+                android:textSize="16sp" />
+
             <!-- Espaço com botões do menu do momento DECIDINDO -->
             <RelativeLayout
                 android:id="@+id/layOpcoes"
                 style="MenuLayButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txtEnderecoOferta">
+                android:layout_below="@+id/txtTimerLabel">
 
                 <Button
                     android:id="@+id/btnRejeitar"

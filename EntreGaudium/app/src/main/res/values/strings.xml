@@ -15,4 +15,5 @@
     <string name="label_endereco_entrega">Vá até o endereço</string>
     <string name="label_endereco_coleta">Local de coleta</string>
     <string name="label_entregas">Entregas: %1$d</string>
+    <string name="segundos_restantes">%1$d(s) restantes</string>
 </resources>
