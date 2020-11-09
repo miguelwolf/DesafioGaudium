@@ -33,9 +33,9 @@ import br.com.gaudium.entrega.webservice.OfertaPedidoWebService;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private LinearLayout layMenuOferta, layMenuColeta, layMenuEntrega;
-    private RelativeLayout layColetaButton, layEntregaButton, layMenu;
-    private TextView txtEnderecoOferta, txtEnderecoColeta, txtEntrega;
+    private LinearLayout layMenuColeta, layMenuEntrega;
+    private RelativeLayout layMenuOferta, layColetaButton, layEntregaButton, layMenu;
+    private TextView txtEnderecoOferta, txtEnderecoColeta, txtEntrega, txtEntregas;
     private Button btnRejeitar, btnAceitar, btnColetar, btnEntregar, btnDebugAction;
 
     Handler handler;
@@ -67,6 +67,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Menu de Oferta
         layMenuOferta = findViewById(R.id.layMenuOferta);
         txtEnderecoOferta = findViewById(R.id.txtEnderecoOferta);
+        txtEntregas = findViewById(R.id.txtEntregasLabel);
         btnRejeitar = findViewById(R.id.btnRejeitar);
         btnRejeitar.setOnClickListener(view -> onReject());
         btnAceitar = findViewById(R.id.btnAceitar);
@@ -305,6 +306,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         layMenuOferta.setVisibility(visible?View.VISIBLE:View.GONE);
         if (entregadorObj.getPedido() != null) {
             txtEnderecoOferta.setText(entregadorObj.getPedido().getEndereco_coleta());
+            txtEntregas.setText(getString(R.string.label_entregas, entregadorObj.getPedido().getEntregas().length));
         }
     }
 
