@@ -209,4 +209,14 @@
         android:backgroundTint="#FFDD5D"
         android:drawableTop="@drawable/ic_bug"
         android:text="Solicitar pedido" />
+
+    <Button
+        android:id="@+id/btnProfilection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/layMenu"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="8dp"
+        android:backgroundTint="@color/colorBlue"
+        android:text="@string/acessar_perfil" />
 </RelativeLayout>

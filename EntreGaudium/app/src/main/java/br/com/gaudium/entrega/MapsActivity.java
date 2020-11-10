@@ -2,6 +2,7 @@ package br.com.gaudium.entrega;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -38,7 +39,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private RelativeLayout layMenuOferta, layColetaButton, layEntregaButton, layMenu;
     private TextView txtEnderecoOferta, txtEnderecoColeta, txtEntrega, txtEntregas,
             txtEntregaEndereco, txtTimer;
-    private Button btnRejeitar, btnAceitar, btnColetar, btnEntregar, btnDebugAction;
+    private Button btnRejeitar, btnAceitar, btnColetar, btnEntregar, btnDebugAction, btnProfilection;
 
     private CountDownTimer timer;
 
@@ -97,6 +98,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         btnDebugAction = findViewById(R.id.btnDebugAction);
         btnDebugAction.setOnClickListener(view -> onDebugAction());
+
+        btnProfilection = findViewById(R.id.btnProfilection);
+        btnProfilection.setOnClickListener(view -> {
+            startActivity(new Intent(this, ProfileActivity.class));
+        });
 
         // Preparar e carregar mapa
         mapFragment.getMapAsync(this);
